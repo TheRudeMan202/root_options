@@ -45,5 +45,3 @@ def put_payoff(strike):
 
     fig.tight_layout()
     plt.show()
-
-put_payoff(10)
