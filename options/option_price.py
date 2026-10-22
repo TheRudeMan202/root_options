@@ -1,8 +1,21 @@
 import numpy as np
-from visual import call_payoff
+from visual import call_payoff, put_payoff
 from database import compounds
 
 def lower_c(strike, underlying, r, comp, T, plot = True):
+
+    """
+    Takes in the strike price, price of the underlying, interest rate
+    compounding frequency in 4 options (check database.py for more info),
+    time periods in years and will also plot the payoffs
+
+    Prices the lower bound of a call option
+
+    Raises type errors if the the inputted values are of the wrong type
+
+    Raises Value errors for the strings that need to be inputted as these
+    are double checked against a dictionary of set options
+    """
 
     if not isinstance(strike, (int, float)):
             raise TypeError("Strike needs to be number")
@@ -21,14 +34,6 @@ def lower_c(strike, underlying, r, comp, T, plot = True):
     
     if not isinstance(plot, bool):
         raise TypeError("Needs to be True or False")
-
-    # i = 0
-    
-    # for x in args:
-    #     i += 1
-    #     if not x:
-    #         raise ValueError(f"No value for {args[i]} ")
-    # i = 0
 
     if comp not in compounds:
            raise ValueError ("Unknown compounding period entered, choose between", compounds)
@@ -41,6 +46,9 @@ def lower_c(strike, underlying, r, comp, T, plot = True):
 
 def lower_p(strike, underlying, r, comp, T, plot = True):
 
+    """
+    Identical to the code above except used to price the lower bound of a put
+    """
     if not isinstance(strike, (int, float)):
             raise TypeError("Strike needs to be number")
 
@@ -59,14 +67,6 @@ def lower_p(strike, underlying, r, comp, T, plot = True):
     if not isinstance(plot, bool):
         raise TypeError("Needs to be True or False")
 
-    # i = 0
-    
-    # for x in args:
-    #     i += 1
-    #     if not x:
-    #         raise ValueError(f"No value for {args[i]} ")
-    # i = 0
-
     if comp not in compounds:
            raise ValueError ("Unknown compounding period entered, choose between", compounds)
 
@@ -74,8 +74,4 @@ def lower_p(strike, underlying, r, comp, T, plot = True):
     print(f"{price:.2f}")
 
     if plot == True:
-        call_payoff(strike)
-
-lower_c(95,100,0.05,"y",1, False)
-
-lower_p(110,100,0.05,"y",1, False)
+        put_payoff(strike)

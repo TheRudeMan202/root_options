@@ -5,7 +5,10 @@ def call_payoff(strike):
     """
     This is to plot the payoff matrix of both long and short 
     calls against price of the underlying
+    Takes the strike price as the main argument and plots the payoff of both
+    long and short options
     """
+    
     St = [x for x in range(int(strike*2))]
     fig,(ax1, ax2) = plt.subplots(1,2,figsize = (10,7))
     payoff = [max(0, x - strike) for x in St]
@@ -27,6 +30,9 @@ def call_payoff(strike):
 
 
 def put_payoff(strike):
+    """
+    Same as above put now we can do it for puts instead
+    """
     St = [x for x in range(int(strike*2))]
     fig,(ax1, ax2) = plt.subplots(1,2,figsize = (10,7))
     payoff = [max(0, strike - x) for x in St]
